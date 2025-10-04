@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"os"
 
@@ -21,7 +20,6 @@ func main() {
 		}
 
 		cepURL := os.Getenv("CEP_API")
-		fmt.Println(cepURL)
 		result, err := cep.GetLocation(cepURL, parsedCep)
 		if err != nil {
 			http.Error(w, "can not find zipcode", http.StatusNotFound)
@@ -29,7 +27,6 @@ func main() {
 		}
 
 		weatherURL := os.Getenv("WEATHER_API")
-		fmt.Println(weatherURL)
 		weather, err := weather.GetWeather(weatherURL, result.City, result.State)
 		if err != nil {
 			http.Error(w, "can not find weather for the given zipcode", http.StatusNotFound)
